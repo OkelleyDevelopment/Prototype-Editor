@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Text Editor</title>
+        <meta charset="UTF-8">
+        <script src="./node_modules/codemirror/lib/codemirror.js"></script>
+        <script src="./node_modules/codemirror/addon/edit/closetag.js"></script>
+        <link rel="stylesheet" href="styles.css" >
+        <script src="./node_modules/codemirror/mode/javascript/javascript.js"></script>
+        <script src="./node_modules/codemirror/mode/python/python.js"></script>
+        <script src="./node_modules/codemirror/mode/markdown/markdown.js"></script>
+        <link rel="stylesheet" href="./node_modules/codemirror/theme/oceanic-next.css">
+        <link rel="stylesheet" href="./node_modules/codemirror/theme/lucario.css">
+        <link rel="stylesheet" href="./node_modules/codemirror/theme/monokai.css">
+    </head>
+
+    <body>
+        <div class="row">
+            <div class="col">
+                <div class="menu">
+                                    <form>
+                <label>Language Mode</Label>
+                <select id="language" onchange="update_lang()">
+                    <option data-count="2" value="python">Python</option>
+                    <option data-count="4" value="javascript">JavaScript</option>
+                    <option data-count="6" value="markdown">Markdown</option>
+                </select>
+                </form>
+             <form>
+                <label>Theme</Label>
+                <select id="theme" onchange="update_theme()">
+                    <option data-count="2" value="ocean-next">oceanic-next</option>
+                    <option data-count="4" value="lucario">lucario</option>
+                    <option data-count="4" value="monokai">monokai</option>
+                </select>
+                </form>
+                <button onClick="update_code()">Submit Code</button>
+
+                </div>
+            </div>
+          <div class="col">
+                <textarea id="editor"></textarea>
+        </div>
+        </div>
+
+    </body>
+    <script>
+    //var editor = CodeMirror(document.body, config);
+    //var editor = CodeMirror(document.getElementById('editor'), config);
+    var e = document.getElementById("language");
+    var strLang = e.value;
+    var editor = CodeMirror.fromTextArea(document.getElementById('editor'),
+    {
+            mode: strLang,
+            theme: "oceanic-next",
+            lineNumbers: true,
+            autoCloseTags: true,
+        });
+
+    //console.log(strLang)
+
+    function update_theme() {
+                var t = document.getElementById('theme').value;
+                console.log(`[THEME] ---> ` + t)
+                this.editor.setOption('theme', t)
+            }
+
+    function update_code() {
+                console.log(`Student has hit submit`);
+                console.log(this.editor.getValue())
+                console.log('-------------------------')
+            }
+
+    function update_lang(lang) {
+                var e = document.getElementById("language");
+                var strLang = e.value;
+                console.log("[UPDATE LANG] ---> " + strLang)
+                this.editor.setOption("mode", strLang);
+            }
+
+    editor.setSize("450", "600");
+    </script>
+</html>
