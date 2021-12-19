@@ -13,4 +13,4 @@ prototype that leads up to the polished idea.
 
 ## Bugs
 
-- Currently the button to submit code is not formatted well 
+- None that affect UI
